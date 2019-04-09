@@ -1,5 +1,6 @@
-## Workshop on Reproducible Data Analysis
-### Western States INBRE Regional Meeting, November 2019
+## Adopting Reproducible Methods for Improving Productivity in Research and Teaching
+### A Workshop by Wyoming INBRE Bioinformatics Core
+### Western INBRE States Regional Meeting, Las Vegas on October 7, 2019
 
 
 ### Vikram E. Chhatre & Nicolas A. Blouin
