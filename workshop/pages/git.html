@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Wyoming IBC" />
+  <meta name="dcterms.date" content="2019-10-07" />
+  <title>Git &amp; GitHub</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../avenir-white.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Git &amp; GitHub</h1>
+<p class="author">Wyoming IBC</p>
+<p class="date">October 7, 2019</p>
+</header>
+<p><a href="../index.html">Return to Main Page</a></p>
+<p><br><br></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p><a href="#how-does-git-work">1.1 How does Git work?</a></p>
+<p><a href="#setting-up-ssh-keys">1.2 Settings up SSH-keys</a></p>
+<p><a href="#checking-your-ssh-keys">1.3 Checking your SSH Keys</a></p>
+<p><a href="#a-typical-authentication-session">1.4 A Typical Authentication Session</a></p>
+<p><a href="#notify-your-computer-about-the-keys">1.5 Notify Your Computer About the Keys</a></p>
+<p><a href="#add-ssh-keys-to-your-github-profile">1.6 Add SSH Keys to Your GitHub Profile</a></p>
+<p><a href="#create-a-new-repository-on-github">1.7 Create a New Repository on GitHub</a></p>
+<p><a href="#upload-your-local-repo-to-github">1.8 Upload Your Local Repo to GitHub</a></p>
+<p><br><br><br></p>
+<h2 id="what-is-git-and-why-do-i-need-it">What is Git and Why do I need it?</h2>
+<p><code>Git</code> is a version control system. Don’t let that make you feel like you are a software engineer. You don’t have to be one for it to be useful to you. In the simplest terms, <code>git</code> keeps a journal of all the changes you will make to any files and folders (create, edit, copy, move, delete etc.) in a given project. Think of it as a virtual assistant that is always listening and keeping track of what you do.</p>
+<p><code>GitHub</code> as you probably already figured out, is an online resource that allows people to host and archive their code. The code can be updated/maintained from multiple computers that you may have access to. You may keep it all to yourself, share it with collaborators or if its useful enough, share it with the community at large. Code is divided into repositories on GitHub and you may have one or a hundred each dedicated to a different project you are working on. Consider that you are teaching a course for which you may host the weekly materials such as presentations, assignments and exam solutions to a GitHub repository and then share the repo with your students.</p>
+<p>As you can see, one doesn’t really need to be a software programmer for Git and GitHub to be useful to them. With this introduction, we are barely scratching the surface. In the Further Reading section below, you will find additional resources to learn about these tools. For now, we will set up your environment so it’s usable today.</p>
+<p><br><br></p>
+<h3 id="how-does-git-work">1.1 How does Git work?</h3>
+<ul>
+<li><p><strong>Note For Windows Users</strong>: Please install git from <a href="https://gitforwindows.org">https://gitforwindows.org/</a></p></li>
+<li><p>Open the commandline terminal on your system. For Windows, right click and choose Git Bash. For Mac, search for <code>terminal</code> in the spotlight search.</p></li>
+</ul>
+<center>
+<img src="git-bash.png" width=300></img> <img src="terminal.png" width=400></img>
+</center>
+<ul>
+<li>Check whether <code>git</code> is working on your system:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">git</span> --version</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">git</span> version 2.20.1 (Apple Git-117)</a></code></pre></div>
+<ul>
+<li>To check git’s documentation i.e. help manual</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">man</span> git</a>
+<a class="sourceLine" id="cb2-3" title="3"></a></code></pre></div>
+<center>
+<img src="githelp.png" width=750></img>
+</center>
+<ul>
+<li>To exit the interactive documentation</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">q</span></a></code></pre></div>
+<ul>
+<li>Check the Status of the current directory where your prompt is located:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ex">fatal</span>: not a git repository (or any of the parent directories)<span class="bu">:</span> .git</a></code></pre></div>
+<ul>
+<li><p>You haven’t created any <code>git</code> repositories yet on your system, so this warning message is to be expected.</p></li>
+<li><p>Let’s create a new repository for testing purposes. First, check where you are on the system, then create a new folder named <code>gitproject</code>.</p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="bu">pwd</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="ex">/Users/wyoibc</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="fu">mkdir</span> gitproject</a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="bu">cd</span> gitproject</a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="bu">pwd</span></a>
+<a class="sourceLine" id="cb5-11" title="11"></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="ex">/Users/wyoibc/gitproject</span></a></code></pre></div>
+<ul>
+<li>Initiate a new repository</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">git</span> init</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ex">Initialized</span> empty Git repository in /Users/wyoibc/gitproject/.git/</a>
+<a class="sourceLine" id="cb6-5" title="5"></a></code></pre></div>
+<ul>
+<li>Check the status again</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="ex">No</span> commits yet</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="ex">nothing</span> to commit (create/copy files and use <span class="st">&quot;git add&quot;</span> to track)</a></code></pre></div>
+<ul>
+<li>This is normal as well since we haven’t yet created any content in here. Now let’s go ahead and create a new file.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="fu">touch</span> README.md</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="ex">vim</span> README.md</a></code></pre></div>
+<ul>
+<li>Create some content in the file</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="ex">title</span>: Learning the Basics of Git</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="ex">author</span>: Wyoming IBC</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="ex">date</span>: October 7, 2019</a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb9-7" title="7"></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="ex">This</span> is a new repository.</a></code></pre></div>
+<ul>
+<li>Save the changes and exit</li>
+</ul>
+<pre class="vi"><code>
+:wq
+</code></pre>
+<ul>
+<li>Now check the git status again</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="ex">No</span> commits yet</a>
+<a class="sourceLine" id="cb11-8" title="8"></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="ex">Untracked</span> files:</a>
+<a class="sourceLine" id="cb11-10" title="10">  <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to include in what will be committed<span class="kw">)</span></a>
+<a class="sourceLine" id="cb11-11" title="11"></a>
+<a class="sourceLine" id="cb11-12" title="12">    <span class="ex">README.md</span></a>
+<a class="sourceLine" id="cb11-13" title="13"></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="ex">nothing</span> added to commit but untracked files present (use <span class="st">&quot;git add&quot;</span> to track)</a></code></pre></div>
+<ul>
+<li>As you can see, Git is now aware of the changes you made to this repository. It knows that there is a new file, although the file is not yet on Git’s roll call. This is by design. Often times, you don’t want every file/folder to be tracked by git. So git only tracks changes in files when you ask it to. Let’s go ahead and do that.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="fu">git</span> add README.md</a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb12-5" title="5"></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb12-7" title="7"></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="ex">No</span> commits yet</a>
+<a class="sourceLine" id="cb12-9" title="9"></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="ex">Changes</span> to be committed:</a>
+<a class="sourceLine" id="cb12-11" title="11">  <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-12" title="12"></a>
+<a class="sourceLine" id="cb12-13" title="13">    <span class="ex">new</span> file:   README.md</a></code></pre></div>
+<ul>
+<li>The next logical step here is to <code>commit</code> this file to git and then push the contents of the repository to your GitHub account. But before we get there, we need to do a couple of preparations:</li>
+</ul>
+<p><br><br></p>
+<h3 id="setting-up-ssh-keys">1.2 Setting up SSH Keys</h3>
+<p>SSH translates into <strong>S</strong>ecure <strong>SH</strong>ell which allows for encrypted communication over the network between two computers. What are keys then you might ask? They are secure passwords, usually a very long alphanumeric sequence of characters. Notice the plural. Why key<strong>s</strong>? That’s because in the world of encryption, there are two keys:</p>
+<ul>
+<li>A private key (known only to you)</li>
+<li>A public key (that you can share with others) as a token of your identity.</li>
+</ul>
+<p>You can use this pair of SSH keys while communicating with remote computing systems so as to identify yourself over an encrypted network. For example, you an enhance and automate your workflow with the GitHub account through the use of SSH keys. So how does it work?</p>
+<ul>
+<li>First, create a pair of SSH-keys; use the email address associated with your GitHub account:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="fu">ssh-keygen</span> -t rsa -b 4096 -C <span class="st">&quot;user@email.com&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="ex">Generating</span> public/private rsa key pair.</a>
+<a class="sourceLine" id="cb14-3" title="3"></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="ex">Enter</span> a file in which to save the key (/Users/wyoibc/.ssh/id_rsa)<span class="bu">:</span> [Press enter]</a></code></pre></div>
+<p>A <em>private</em> ssh-key is should be secured with a <em>passphrase</em>, which you will be asked to create. Think of this as a strong password to safeguard your private ssh-key. Make this passphrase strong and secure, and write it down on a post-it or in your notebook somewhere.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="ex">Enter</span> passphrase :</a>
+<a class="sourceLine" id="cb15-3" title="3"></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="ex">Enter</span> same passphrase again:</a></code></pre></div>
+<p><br><br></p>
+<h3 id="checking-your-ssh-keys">1.3 Checking Your SSH Keys</h3>
+<p>Your keys have now been stored in the location you chose above e.g. <code>/Users/wyoibc/.ssh</code>. Let’s go there and check to make sure.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="bu">cd</span> /Users/wyoibc/.ssh/</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="fu">ls</span> -lh</a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="ex">-rw-------</span>  1 wyoibc  inbre   1.7K Oct 07  2019 id_rsa</a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="ex">-rw-r--r--</span>  1 wyoibc  inbre   406B Oct 07  2019 id_rsa.pub</a>
+<a class="sourceLine" id="cb16-7" title="7"></a></code></pre></div>
+<ul>
+<li>Key ending in <code>.pub</code> is your public key which you can share with a remote server. But what’s inside it?</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1"><span class="fu">cat</span> id_rsa.pub</a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="ex">ssh-rsa</span> AAAAB3NzaC1yc2EAAAABIwAAAQEA6UJHt+SrbvC2K/E/FozdqrsScVYZmdv476b4A/4takitEXEDjorzXWAHcMHSP/pu3VPlZv6G5s04QkXYRMYxpb3c+LY+7+I39i6aYtGbbkx+HiLIGXDw5R5Pqlh+aSec1ndEXv5aK5yWghMDpOmaq4K+rrhd70zRem28+uUhZeCocJxr56ORIHhBAI84ZKrk2tOnuaD8ad4AKoidM1y9CHRPRB3HzgmaEvO3YzZgiM5A83EkSHpmR1lZnFBvAibX6+lJNYMHwy3fsuxDml1GpDNUCTesSkzQX7L+MBppuylm358vW7xyGdZP245kLYNwqja5nRKprL2uC9rwmQ3T6Q== wyoinbre@gmail.com</a></code></pre></div>
+<ul>
+<li>What about the private key?</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="fu">cat</span> id_rsa</a>
+<a class="sourceLine" id="cb18-3" title="3"></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="ex">-----BEGIN</span> RSA PRIVATE KEY-----</a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="ex">Proc-Type</span>: 4,ENCRYPTED</a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="ex">DEK-Info</span>: DES-EDE3-CBC,4CC25AF5303CA059</a>
+<a class="sourceLine" id="cb18-7" title="7"></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb18-11" title="11"></a>
+<a class="sourceLine" id="cb18-12" title="12"><span class="ex">-----END</span> RSA PRIVATE KEY-----</a>
+<a class="sourceLine" id="cb18-13" title="13"></a></code></pre></div>
+<p><br><br></p>
+<h3 id="a-typical-authentication-session">1.4 A Typical Authentication Session</h3>
+<p>So how do these keys work together allow secure communication with a remote server?</p>
+<ul>
+<li><p>The public key is shared with the server you are trying to communicate with.</p></li>
+<li><p>When you try to connect to the server, it looks at your public key, and sends a manifest to your computer. Your computer then checks your public key against the private key and if they match, notifies the server that you are who you say you are.</p></li>
+<li><p>Server logs you in or allows file/data transfer.</p></li>
+</ul>
+<p><br><br></p>
+<h3 id="notify-your-computer-about-the-keys">1.5 Notify Your Computer About the Keys</h3>
+<p>There is an SSH agent on your system which needs to be notified of the presence of ssh keys. This is a two step process:</p>
+<ul>
+<li>First create a configuration file named <code>config</code></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="bu">cd</span> /Users/wyoibc/.ssh</a>
+<a class="sourceLine" id="cb19-3" title="3"></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="ex">vim</span> config</a></code></pre></div>
+<ul>
+<li>Add the following lines to your newly created config file. Pay attention to the upper and lowercase letters.</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1"><span class="ex">Host</span> *</a>
+<a class="sourceLine" id="cb20-2" title="2">   <span class="ex">AddKeysToAgent</span> yes</a>
+<a class="sourceLine" id="cb20-3" title="3">   <span class="ex">UseKeychain</span> yes</a>
+<a class="sourceLine" id="cb20-4" title="4"></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="ex">Host</span> YOUR_GITHUB_USER_NAME.github.com</a>
+<a class="sourceLine" id="cb20-6" title="6">        <span class="ex">HostName</span> github.com</a>
+<a class="sourceLine" id="cb20-7" title="7">        <span class="ex">User</span> git</a>
+<a class="sourceLine" id="cb20-8" title="8">        <span class="ex">PreferredAuthentications</span> publickey</a>
+<a class="sourceLine" id="cb20-9" title="9">        <span class="ex">IdentityFile</span> /Users/wyoibc/.ssh/id_rsa</a></code></pre></div>
+<ul>
+<li>Second, notify the ssh agent</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="fu">ssh-add</span> -h</a>
+<a class="sourceLine" id="cb21-3" title="3"></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="ex">ssh-add</span>: illegal option -- h</a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="ex">usage</span>: ssh-add [options] [file ...]</a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="ex">Options</span>:</a>
+<a class="sourceLine" id="cb21-7" title="7">  <span class="ex">-l</span>          List fingerprints of all identities.</a>
+<a class="sourceLine" id="cb21-8" title="8">  <span class="ex">-E</span> hash     Specify hash algorithm used for fingerprints.</a>
+<a class="sourceLine" id="cb21-9" title="9">  <span class="ex">-L</span>          List public key parameters of all identities.</a>
+<a class="sourceLine" id="cb21-10" title="10">  <span class="ex">-k</span>          Load only keys and not certificates.</a>
+<a class="sourceLine" id="cb21-11" title="11">  <span class="ex">-c</span>          Require confirmation to sign using identities</a>
+<a class="sourceLine" id="cb21-12" title="12">  <span class="ex">-m</span> minleft  Maxsign is only changed if less than minleft are left (for XMSS)</a>
+<a class="sourceLine" id="cb21-13" title="13">  <span class="ex">-M</span> maxsign  Maximum number of signatures allowed (for XMSS)</a>
+<a class="sourceLine" id="cb21-14" title="14">  <span class="ex">-t</span> life     Set lifetime (in seconds) <span class="ex">when</span> adding identities.</a>
+<a class="sourceLine" id="cb21-15" title="15">  <span class="ex">-d</span>          Delete identity.</a>
+<a class="sourceLine" id="cb21-16" title="16">  <span class="ex">-D</span>          Delete all identities.</a>
+<a class="sourceLine" id="cb21-17" title="17">  <span class="ex">-x</span>          Lock agent.</a>
+<a class="sourceLine" id="cb21-18" title="18">  <span class="ex">-X</span>          Unlock agent.</a>
+<a class="sourceLine" id="cb21-19" title="19">  <span class="ex">-s</span> pkcs11   Add keys from PKCS#11 provider.</a>
+<a class="sourceLine" id="cb21-20" title="20">  <span class="ex">-e</span> pkcs11   Remove keys provided by PKCS#11 provider.</a>
+<a class="sourceLine" id="cb21-21" title="21">  <span class="ex">-q</span>          Be quiet after a successful operation.</a>
+<a class="sourceLine" id="cb21-22" title="22">  <span class="ex">-A</span>          Add all identities stored in your keychain.</a>
+<a class="sourceLine" id="cb21-23" title="23">  <span class="ex">-K</span>          Store passphrases in your keychain.</a>
+<a class="sourceLine" id="cb21-24" title="24">              <span class="ex">With</span> -d, remove passphrases from your keychain.</a>
+<a class="sourceLine" id="cb21-25" title="25"></a></code></pre></div>
+<ul>
+<li>Check what the ssh agent has in its memory</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="fu">ssh-add</span> -l</a>
+<a class="sourceLine" id="cb22-3" title="3"></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="ex">The</span> agent has no identities.</a>
+<a class="sourceLine" id="cb22-5" title="5"></a></code></pre></div>
+<ul>
+<li>Good! Let’s add our identity</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="fu">ssh-add</span> /Users/wyoibc/.ssh/id_rsa</a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="ex">Enter</span> passphrase for /Users/wyoibc/.ssh/id_rsa: </a>
+<a class="sourceLine" id="cb23-5" title="5"></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="ex">Identity</span> added: /Users/wyoibc/.ssh/id_rsa (/Users/wyoibc/.ssh/id_rsa)</a>
+<a class="sourceLine" id="cb23-7" title="7"></a></code></pre></div>
+<ul>
+<li>Check the memory one more time</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="fu">ssh-add</span> -l</a>
+<a class="sourceLine" id="cb24-3" title="3"></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="ex">2048</span> SHA256:ZtqsHDh1QDAKDIKzQ4J4FYlnSGi3Di17mlJzakGtxF4 /Users/wyoibc/.ssh/id_rsa (RSA)</a></code></pre></div>
+<p><br><br></p>
+<h3 id="add-ssh-keys-to-your-github-profile">1.6 Add SSH Keys to Your GitHub Profile</h3>
+<ul>
+<li><p>Navigate to <a href="https://github.com/YOUR_USER_NAME">https://github.com/YOUR_USER_NAME</a></p></li>
+<li><p>Then follow these steps:</p></li>
+</ul>
+<center>
+<img src="step1.png" width=800></img> <img src="step2.png" width=300></img> <img src="step3.png" width=800></img> <img src="step4.png" width=800></img>
+</center>
+<p>Give your key whatever name you’d like, but don’t use spaces or special characters in that name. Then paste the contents of your <code>id_rsa.pub</code> in the provided box. Then save. Your saved key should appear like this:</p>
+<center>
+<img src="step5.png" width=800></img>
+</center>
+<p><br><br></p>
+<h3 id="create-a-new-repository-on-github">1.7 Create a New Repository on GitHub</h3>
+<ul>
+<li><p>Follow on screen instructions for creating a new repo called <code>gitproject</code></p></li>
+<li><p>Make sure <strong>not</strong> to initialize the repo with a README</p></li>
+<li><p>Once the repo is generated, use the following procedure for uploading your local work to GitHub</p></li>
+</ul>
+<p><br><br></p>
+<h3 id="upload-your-local-repo-to-github">1.8 Upload Your Local Repo to GitHub</h3>
+<ul>
+<li>First go to the repository where you had created a README.md file</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="bu">cd</span> /Users/wyoibc/gitproject</a>
+<a class="sourceLine" id="cb25-3" title="3"></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="fu">cat</span> README.md</a>
+<a class="sourceLine" id="cb25-5" title="5"></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="ex">title</span>: Learning the Basics of Git</a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="ex">author</span>: Wyoming IBC</a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="ex">date</span>: October 7, 2019</a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="ex">---</span></a>
+<a class="sourceLine" id="cb25-11" title="11"></a>
+<a class="sourceLine" id="cb25-12" title="12"><span class="ex">This</span> is a new repository.</a>
+<a class="sourceLine" id="cb25-13" title="13"></a></code></pre></div>
+<ul>
+<li>Check git status</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" title="1"></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb26-5" title="5"></a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="ex">No</span> commits yet</a>
+<a class="sourceLine" id="cb26-7" title="7"></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="ex">Changes</span> to be committed:</a>
+<a class="sourceLine" id="cb26-9" title="9">  <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage<span class="kw">)</span></a>
+<a class="sourceLine" id="cb26-10" title="10"></a>
+<a class="sourceLine" id="cb26-11" title="11">    <span class="ex">new</span> file:   README.md</a></code></pre></div>
+<ul>
+<li>Configure git to use your github credentials</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="fu">git</span> config user.name <span class="st">&quot;YOUR GITHUB USER NAME&quot;</span> <span class="co">## Keep the quotes</span></a>
+<a class="sourceLine" id="cb27-3" title="3"></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="fu">git</span> config user.email <span class="st">&quot;YOUR EMAIL ASSOCIATED WITH GITHUB&quot;</span>  <span class="co">## Keep the quotes</span></a></code></pre></div>
+<ul>
+<li>Check your settings</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1"></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="fu">git</span> config --list</a>
+<a class="sourceLine" id="cb28-3" title="3"></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="ex">user.name</span>=wyoibc</a>
+<a class="sourceLine" id="cb28-5" title="5"></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="ex">user.email</span>=wyoinbre@gmail.com</a></code></pre></div>
+<ul>
+<li>Now we are good to upload; First, commit the README.md to git</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1"></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;A helpful note about your changes&quot;</span> <span class="co">## You could say something like &quot;Initial commit&quot;</span></a></code></pre></div>
+<ul>
+<li>Tell git your repository’s name</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="fu">git</span> remote add origin git@github.com:wyoibc/gitproject</a></code></pre></div>
+<ul>
+<li>Finally push changes</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb31-1" title="1"></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="fu">git</span> push -u origin master</a></code></pre></div>
+<ul>
+<li>Ideally, you should see something like the following:</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1"></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="ex">Enumerating</span> objects: 3, done.</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="ex">Counting</span> objects: 100% (3/3), <span class="kw">done</span><span class="ex">.</span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="ex">Delta</span> compression using up to 8 threads</a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="ex">Compressing</span> objects: 100% (2/2), <span class="kw">done</span><span class="ex">.</span></a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="ex">Writing</span> objects: 100% (3/3), <span class="ex">328</span> bytes <span class="kw">|</span> <span class="ex">328.00</span> KiB/s, done.</a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="ex">Total</span> 3 (delta 0), <span class="ex">reused</span> 0 (delta 0)</a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="ex">To</span> github.com:wyoibc/gitproject</a>
+<a class="sourceLine" id="cb32-9" title="9"> <span class="ex">*</span> [new branch]      master -<span class="op">&gt;</span> master</a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="ex">Branch</span> <span class="st">&#39;master&#39;</span> set up to track remote branch <span class="st">&#39;master&#39;</span> from <span class="st">&#39;origin&#39;</span>.</a></code></pre></div>
+<ul>
+<li><p>This indicates that the repo was successfully synced with GitHub. Go to GitHub and check it out:</p>
+<ul>
+<li><a href="https://github.com/YOUR_GITHUB_USERNAME/gitproject">https://github.com/YOUR_GITHUB_USERNAME/gitproject</a></li>
+</ul></li>
+</ul>
+<center>
+<img src="step6.png" width=800></img>
+</center>
+</body>
+</html>
