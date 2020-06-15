@@ -5,6 +5,7 @@ date: September 16, 2019
 
 ### A Workshop by Vikram E. Chhatre & Nicolas A. Blouin
 
+Test for contributing changes to your repository
 
 <br><br>
 
